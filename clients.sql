@@ -32,5 +32,18 @@ id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 nom VARCHAR(50) NOT NULL,
 prenom VARCHAR(50) NOT NULL,
 email VARCHAR(70) UNIQUE,
-telephone VARCHAR (20) NOT NULL
-);
+telephone VARCHAR(20) NOT NULL);
+
+-- 7. Visualisation de la table clients
+
+DESC clients
+
+-- 8. Ajout d'une colonne dans la table client
+
+ALTER TABLE clients ADD COLUMN postnom VARCHAR(50);
+-- Si ajout après une colonne en particulier
+ALTER TABLE clients ADD COLUMN postnom VACHAR(50) AFTER prenom;
+
+-- 9. Modification d'une colonne dans la table client
+
+ALTER TABLE clients MODIFY COLUMN email NOT NULL;
