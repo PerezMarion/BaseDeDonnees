@@ -36,7 +36,7 @@ telephone VARCHAR(20) NOT NULL);
 
 -- 7. Visualisation de la table clients
 
-DESC clients
+DESC clients;
 
 -- 8. Ajout d'une colonne dans la table clients
 
@@ -59,11 +59,31 @@ values("dumortier","steven","stevendumortier59@gmail.com","0747474747"),
 
 -- 11. Lire des données dans la table clients
 
-SELECT * FROM clients
+SELECT * FROM clients;
 ou
-SELECT email FROM clients
+SELECT email FROM clients;
+ou
+SELECT * FROM clients WHERE age>25
+ou
+SELECT * FROM clients WHERE age<30 AND prenom=ludovic;
 
 -- 12. Modification de données dans la table clients
 
-UPDATE clients SET age=25 WHERE id=1
+UPDATE clients SET age=25 WHERE id=1;
+-- Si modification multiple
+UPDATE clients SET telephone="0612345678", age=1 WHERE nom="dupont";
 
+-- 13. Suppression de données dans la table clients
+
+DELETE FROM clients WHERE id=2;
+
+-- 14. Configuration de SQL en mode strict
+-- Valeur pour le mode strict : STRICT_TRANS_TABLES;
+
+-- Vérifier le mode de transaction
+
+SHOW VARIABLES LIKE "sql_mode";
+
+-- Définir le mode strict pour les transactions
+
+set sql_mode="STRICT_TRANS_TABLES";
