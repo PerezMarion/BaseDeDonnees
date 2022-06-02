@@ -19,11 +19,18 @@ USE poe_ventes;
 SHOW TABLES;
 
 -- 6. Création de la table clients
+
 -- INTEGER : type "entier"
 -- NOT NULL : cette colonne doit toujours contenir une information
 -- AUTO_INCREMENT : fournir une valeur en incrémentant automatiquement les clés
--- PRIMARY KEY : marqueuer la colonne comme étant la clé primaire
-CREATE TABLE clients(
-id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY
+-- PRIMARY KEY : marquer la colonne comme étant la clé primaire
+-- VARCHAR : type "texte" (possible limitation du nombre de caractère)
+-- UNIQUE : appliquer une contrainte d'unicité
 
+CREATE TABLE clients(
+id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nom VARCHAR(50) NOT NULL,
+prenom VARCHAR(50) NOT NULL,
+email VARCHAR(70) UNIQUE,
+telephone VARCHAR (20) NOT NULL
 );
