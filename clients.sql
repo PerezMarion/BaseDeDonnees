@@ -130,6 +130,6 @@ FROM clients JOIN telephones ON clients.id=telephones.id_client;
 colonnes email de la table clients et numero de la table telephones
 depuis la table clients qui est liée à la table telephones par l'association
 colonne id dans la table client = colonne id_client dans téléphones"
-
+ 
 SELECT CONCAT(clients.prenom," ",clients.nom) AS nom, clients.email,telephones.numero 
 FROM clients JOIN telephones ON clients.id=telephones.id_client;

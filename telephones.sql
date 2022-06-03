@@ -110,6 +110,3 @@ SELECT MAX(units_sold) FROM telephones;
 -- 22. Afficher la vente la moins importante
 
 SELECT MIN(units_sold) FROM telephones;
-
-
-
