@@ -116,10 +116,20 @@ values(1234567890,3),(2345678901,4),
 (3456789012,5),(4567890123,5),(5678901234,6),
 (6789012345,7),(7890123456,7),(8901234567,7);
 
--- 17. Faire une requête multitables : afficher pour tous les clients, tous les numéros de téléphone
-"Lister les colonnes nom et prénom de la table clients et numéro de la table telephone
+-- 17. Faire une requête multitable : afficher pour tous les clients, tous les numéros de téléphone
+"Lister les colonnes nom de la table clients, prénom de la table clients et numéro de la table telephone
 depuis la table clients qui est liée à la table téléphones par l'association
 colonne id dans la table client = colonne id_client dans téléphones"
 
 SELECT clients.nom, clients.prenom, telephones.numero
+FROM clients JOIN telephones ON clients.id=telephones.id_client;
+
+-- 17bis. Faire une requête multitable avec concaténation et alias
+
+"Lister les colonnes nom et prénom de la table clients concaténés sous le terme nom, ainsi que les
+colonnes email de la table clients et numero de la table telephones
+depuis la table clients qui est liée à la table telephones par l'association
+colonne id dans la table client = colonne id_client dans téléphones"
+
+SELECT CONCAT(clients.prenom," ",clients.nom) AS nom, clients.email,telephones.numero 
 FROM clients JOIN telephones ON clients.id=telephones.id_client;
