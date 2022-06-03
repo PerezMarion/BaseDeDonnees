@@ -73,4 +73,43 @@ SELECT CONCAT(name," ",manufacturer), price FROM telephones;
 
 -- 13. Faire la fois : obtenir le chiffre d'affaire, renommer la colonne et concater
 
-SELECT name, manufacturer, CONCAT(price*units_sold," euros") AS "chiffre_d_affaire" FROM telephones;
+SELECT name AS modele, manufacturer AS marque, CONCAT(price*units_sold," euros") AS chiffre_d_affaire FROM telephones;
+
+-- 14. Créer une vue à partir d'une requête (pour ne pas avoir à réécrire une longue requête)
+
+CREATE VIEW v_revenu_total AS SELECT name AS modele, manufacturer AS marque, CONCAT(price*units_sold," euros") AS chiffre_d_affaire FROM telephones;
+
+-- 15. Afficher une vue
+
+SELECT * FROM v_revenu_total;
+
+-- 16. Lister toutes les marques sans redondance
+
+SELECT DISTINCT(manufacturer) FROM telephones;
+
+-- 17. Compter le nombre d'enregistrement dans la table
+
+SELECT COUNT(*) FROM telephones;
+
+-- 18. Compter le nombre de téléphones de marque Apple dans la table
+
+SELECT COUNT(*) FROM telephones WHERE manufacturer="Apple";
+
+-- 19. Calculer le total des ventes de tous les téléphones (somme)
+
+SELECT SUM(units_sold) FROM telephones;
+
+-- 20. Calculer la moyenne des ventes de tous les téléphones
+
+SELECT AVG(units_sold) FROM telephones;
+
+-- 21. Afficher la vente la plus importante
+
+SELECT MAX(units_sold) FROM telephones;
+
+-- 22. Afficher la vente la moins importante
+
+SELECT MIN(units_sold) FROM telephones;
+
+
+
