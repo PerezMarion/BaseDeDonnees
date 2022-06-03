@@ -35,12 +35,27 @@ SELECT name FROM telephones;
 
 -- 5. Ecrire une requête pour lister tous les telephone(name, manufacturer) de tous les téléphones dont le prix est supérieur à 200€
 
-SELECT name, manufacturer FROM telephones where price>200;
+SELECT name, manufacturer FROM telephones WHERE price>200;
 
 -- 6. Ecrire une requête pour lister tous les telephone(name, manufacturer) de tous les téléphone dont le prix est varie entre 150 et 200€
 
-SELECT name, manufacturer FROM telephones where price>=150 AND price <=200;
+SELECT name, manufacturer FROM telephones WHERE price>=150 AND price <=200;
+ou
+SELECT name, manufacturer FROM telephones WHERE price BETWEEN 150 AND 200;
 
 -- 7. Lister tous les téléphones de marque Samsung et Apple
 
 SELECT * FROM telephones WHERE manufacturer='Apple' OR manufacturer='Samsung';
+ou
+SELECT * FROM telephones WHERE manufacturer IN("Apple","Samsung");
+
+-- 8. Lister tous les téléphones(id, name, manufacturer, price) par ordre croissant/décroissant de prix
+
+SELECT id, name, manufacturer, price FROM telephones ORDER by price ASC;
+SELECT id, name, manufacturer, prixe FROM telephones ORDER by price DESC;
+
+-- 9. Lister tous les téléphones par ordre de prix décroissant puis à prix égal par fabriquant par ordre alphabétique
+
+SELECT * FROM telephones ORDER BY price DESC, manufacturer ASC;
+
+-- 10. 
