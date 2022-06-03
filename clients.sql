@@ -91,11 +91,35 @@ set sql_mode="STRICT_TRANS_TABLES";
 
 
 -- 14. Créer une autre table liée à la première
--- Ici l'identifiant de la table clients va servir d'identifiant client dans la table telephones pour lier les différents téléphones aux clients
+-- Ici l'identifiant de la table clients va servir d'identifiant client dans
+-- la table telephones pour lier les différents téléphones aux clients
+
+-- ON DELETE SET NULL : si le compte (table clients) est supprimé, les
+-- informations correspondantes dans les tables liées seront remplacées par NULL
+-- ON DELETE CASCADE : si le compte (table clients) est supprimé, les
+-- informations correspondantes dans les tables liées seront supprimées aussi
 
 CREATE TABLE telephones(
 id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 numero VARCHAR(20) NOT NULL,
 id_client INTEGER,
-FOREIGN KEY(id_client) REFERENCES clients(id));
+FOREIGN KEY(id_client) REFERENCES clients(id) ON DELETE CASCADE);
 
+-- 15. Supprimer la colonne téléphone de la table clients
+
+ALTER TABLE clients DROP COLUMN telephone;
+
+-- 16. Ajouter les numéros de téléphones à la table telephones en respectant les id
+
+INSERT INTO telephones(numero, id_client) 
+values(1234567890,3),(2345678901,4),
+(3456789012,5),(4567890123,5),(5678901234,6),
+(6789012345,7),(7890123456,7),(8901234567,7);
+
+-- 17. Faire une requête multitables : afficher pour tous les clients, tous les numéros de téléphone
+"Lister les colonnes nom et prénom de la table clients et numéro de la table telephone
+depuis la table clients qui est liée à la table téléphones par l'association
+colonne id dans la table client = colonne id_client dans téléphones"
+
+SELECT clients.nom, clients.prenom, telephones.numero
+FROM clients JOIN telephones ON clients.id=telephones.id_client;
