@@ -77,7 +77,7 @@ UPDATE clients SET telephone="0612345678", age=1 WHERE nom="dupont";
 
 DELETE FROM clients WHERE id=2;
 
--- 14. Configuration de SQL en mode strict
+-- A part. Configuration de SQL en mode strict
 -- Valeur pour le mode strict : STRICT_TRANS_TABLES;
 
 -- Vérifier le mode de transaction
@@ -87,3 +87,15 @@ SHOW VARIABLES LIKE "sql_mode";
 -- Définir le mode strict pour les transactions
 
 set sql_mode="STRICT_TRANS_TABLES";
+
+
+
+-- 14. Créer une autre table liée à la première
+-- Ici l'identifiant de la table clients va servir d'identifiant client dans la table telephones pour lier les différents téléphones aux clients
+
+CREATE TABLE telephones(
+id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+numero VARCHAR(20) NOT NULL,
+id_client INTEGER,
+FOREIGN KEY(id_client) REFERENCES clients(id));
+
