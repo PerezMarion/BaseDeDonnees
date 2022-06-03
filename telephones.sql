@@ -58,4 +58,19 @@ SELECT id, name, manufacturer, prixe FROM telephones ORDER by price DESC;
 
 SELECT * FROM telephones ORDER BY price DESC, manufacturer ASC;
 
--- 10. 
+-- 10. Obtenir le chiffre d'affaire réalisé pour chaque téléphone (price x units_sold)
+
+SELECT name, manufacturer, (price*units_sold) FROM telephones;
+
+-- 11. Réaliser un renommage de colonne uniquement pour l'affichage
+
+SELECT name AS modele, manufacturer AS marque, price AS prix, (price*units_sold) AS chiffre_d_affaire FROM telephones;
+
+-- 12. Concaténer (mettre bout à bout deux chaînes de caractères) 
+
+SELECT name, facturer, CONCAT(price," euros") FROM telephones;
+SELECT CONCAT(name," ",manufacturer), price FROM telephones;
+
+-- 13. Faire la fois : obtenir le chiffre d'affaire, renommer la colonne et concater
+
+SELECT name, manufacturer, CONCAT(price*units_sold," euros") AS "chiffre_d_affaire" FROM telephones;
