@@ -2,6 +2,8 @@ CREATE DATABASE Conseil_de_classe;
 
 USE DATABASE Conseil_de_classe;
 
+-- 1. Créer une table pour les avis de passage en classe supérieure
+
 CREATE TABLE Avis_classe_sup(
     id INTEGER(3) NOT NULL PRIMARY KEY,
     Nom VARCHAR(20) NOT NULL,
@@ -29,6 +31,8 @@ INSERT INTO Avis_classe_sup(id,Nom,Prenom,Mathematiques,Francais,Sport,Histoire_
 
 SELECT * FROM Avis_classe_sup;
 
+-- 2. Créer une table pour les notes de mathematiques
+
 CREATE TABLE Notes_Mathematiques(
     id INTEGER(3) AUTO_INCREMENT NOT NULL PRIMARY KEY,
     m_id INTEGER(3),
@@ -55,3 +59,29 @@ INSERT INTO Notes_Mathematiques(m_id,m_ds1,m_ds2,m_dm1,m_ds3,m_dm2) VALUES
 
 SELECT * FROM Notes_Mathematiques;
 
+-- 3. Créer une table pour les notes de français
+
+CREATE TABLE Notes_Francais(
+    id INTEGER(3) AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    f_id INTEGER(3),
+    f_ds1 INTEGER(2) NOT NULL,
+    f_ds2 INTEGER(2) NOT NULL,
+    f_expose INTEGER(2) NOT NULL,
+    f_ds3 INTEGER(2) NOT NULL
+    FOREIGN KEY(f_id) REFERENCES Avis_classe_sup(id) ON DELETE SET NULL);
+
+DESC Notes_Francais;
+
+INSERT INTO Notes_Francais(f_id,f_ds1,f_ds2,f_expose,f_ds3) VALUES
+(132,6,9,15,10),
+(28,12,12,16,15),
+(66,9,10,14,11),
+(65,15,14,17,12),
+(23,13,13,14,9),
+(74,14,12,13,14),
+(49,16,17,18,15),
+(17,10,12,14,13),
+(180,11,15,15,16),
+(101,12,11,12,10);
+
+SELECT * FROM Notes_Francais;
