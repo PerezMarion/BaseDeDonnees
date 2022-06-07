@@ -110,3 +110,21 @@ SELECT MAX(units_sold) FROM telephones;
 -- 22. Afficher la vente la moins importante
 
 SELECT MIN(units_sold) FROM telephones;
+
+-- 23. Afficher le nombre d'unités vendues au total pour chaque fabricants
+
+SELECT manufacturer, SUM(units_sold) FROM telephones GROUP BY manufacturer;
+
+-- 24. Afficher par ordre décroissant le chiffre d'affaire pour chaque fabricants
+
+SELECT manufacturer, SUM(price*units_sold) AS chiffre_d_affaire FROM telephones GROUP BY manufacturer ORDER BY chiffre_d_affaire DESC;
+
+-- 25. Afficher par odre croissant les fabricants dont le chiffre d'affaire est supérieur à 10 000 000 euros
+-- On n'utilise pas "WHERE" mais "HAVING" lorqu'on a fait un groupage
+
+SELECT manufacturer, SUM(price*units_sold) AS chiffre_d_affaire FROM telephones GROUP BY manufacturer HAVING chiffre_d_affaire>10000000 ORDER BY chiffre_d_affaire ASC;
+
+--26. Untiliser une requête dans une condition
+-- Afficher par ordre croissant le nom et le prix des téléphones dont le prix est inférieur à la moyenne des prix
+
+SELECT name, price FROM telephones WHERE price<(SELECT AVG(price) FROM telephones) ORDER BY price ASC;
