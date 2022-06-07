@@ -128,3 +128,8 @@ SELECT manufacturer, SUM(price*units_sold) AS chiffre_d_affaire FROM telephones 
 -- Afficher par ordre croissant le nom et le prix des téléphones dont le prix est inférieur à la moyenne des prix
 
 SELECT name, price FROM telephones WHERE price<(SELECT AVG(price) FROM telephones) ORDER BY price ASC;
+
+-- 27. Notion de table de jointure / Relation many to many
+-- Table 1 clients : id, nom, prénom, mail
+-- Table 2 telephones : id, désignation, prix, quantité en stock
+-- Table de jointure achat qui fait le lien entre les deux : id, id_client, id_telephone, quantite_achetee ...
