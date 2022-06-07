@@ -52,3 +52,9 @@ INSERT INTO achats(id, id_client, id_produit) VALUES
 (25, 4, 1), (26, 3, 7), (27, 2, 8), (28, 4, 7), (29, 1, 6), (30, 3, 2), (31, 4, 4), (32, 2, 6),
 (33, 4, 6), (34, 3, 7), (35, 2, 2), (36, 4, 2), (37, 3, 7), (38, 2, 1), (39, 2, 9), (40, 3, 6);
 
+SELECT * FROM achats;
+
+-- Afficher tous les clients et les achats effectués (double jointure)
+
+SELECT CONCAT(clients.Prenom," ",clients.Nom) AS Client, produits.Designation FROM clients 
+JOIN achats ON clients.id=achats.id_client JOIN produits ON produits.id=achats.id_produit;
