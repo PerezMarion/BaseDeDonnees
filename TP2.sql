@@ -9,9 +9,7 @@ designation VARCHAR(50) NOT NULL,
 clientId INTEGER NOT NULL,
 nbDays INTEGER NOT NULL,
 unitPrice INTEGER NOT NULL,
-state INTEGER NOT NULL);
-
--- Comment faire pour qu'il ne puisse y avoir que trois possibilités : 0,1,2 ?
+state(1) INTEGER NOT NULL);
 
 INSERT INTO orders(typePresta,designation,clientId,nbDays,unitPrice,state)values
 ("formation","angular init",2,3,1200,0),
@@ -40,9 +38,7 @@ adress VARCHAR(100) NOT NULL,
 zipCode VARCHAR(20) NOT NULL,
 city VARCHAR(20) NOT NULL,
 country VARCHAR(20) NOT NULL,
-state INTEGER NOT NULL);
-
--- Même question avec deux possibilités : 0,1 ?
+state(1) INTEGER NOT NULL);
 
 INSERT INTO clients(compagnyName,firstName,lastName,email,phone,adress,zipCode,city,country,state)values
 ("capgemini","fabrice","martin","martin@mail.com","06 56 85 84 33","1 rue de la paix","xyz","nantes","france",0),
@@ -60,7 +56,7 @@ SELECT * FROM clients;
 
 -- 2. Ecrire une requête pour créer ces deux tables en prenant en compte la jointure
 
-ALTER TABLE orders ADD FOREIGN KEY(clientId) REFERENCES clients(id);
+ALTER TABLE orders ADD FOREIGN KEY(clientId) REFERENCES clients(id) ON DELETE RESTRICT;
 
 SELECT clients.compagnyName, clients.state, orders.typePresta, orders.designation 
 FROM clients JOIN orders ON clients.id=orders.clientId;
