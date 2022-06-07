@@ -3,13 +3,13 @@ CREATE DATABASE tp2
 USE DATABASE tp2
 
 CREATE TABLE orders(
-id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-typePresta VARCHAR(50) NOT NULL,
-designation VARCHAR(50) NOT NULL,
-clientId INTEGER NOT NULL,
-nbDays INTEGER NOT NULL,
-unitPrice INTEGER NOT NULL,
-state(1) INTEGER NOT NULL);
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    typePresta VARCHAR(50) NOT NULL,
+    designation VARCHAR(50) NOT NULL,
+    clientId INTEGER NOT NULL,
+    nbDays INTEGER NOT NULL,
+    unitPrice INTEGER NOT NULL,
+    state(1) INTEGER NOT NULL);
 
 INSERT INTO orders(typePresta,designation,clientId,nbDays,unitPrice,state)values
 ("formation","angular init",2,3,1200,0),
@@ -28,17 +28,17 @@ CREATE VIEW prix_HT_TTC AS SELECT (unitPrice*nbDays) AS totalExcluseTaxe, (unitP
 SELECT * FROM prix_HT_TTC;
 
 CREATE TABLE clients(
-id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-compagnyName VARCHAR(50) NOT NULL,
-firstName VARCHAR(50) NOT NULL,
-lastName VARCHAR(50) NOT NULL,
-email VARCHAR(50) NOT NULL,
-phone VARCHAR(20) NOT NULL,
-adress VARCHAR(100) NOT NULL,
-zipCode VARCHAR(20) NOT NULL,
-city VARCHAR(20) NOT NULL,
-country VARCHAR(20) NOT NULL,
-state(1) INTEGER NOT NULL);
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    compagnyName VARCHAR(50) NOT NULL,
+    firstName VARCHAR(50) NOT NULL,
+    lastName VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    adress VARCHAR(100) NOT NULL,
+    zipCode VARCHAR(20) NOT NULL,
+    city VARCHAR(20) NOT NULL,
+    country VARCHAR(20) NOT NULL,
+    state(1) INTEGER NOT NULL);
 
 INSERT INTO clients(compagnyName,firstName,lastName,email,phone,adress,zipCode,city,country,state)values
 ("capgemini","fabrice","martin","martin@mail.com","06 56 85 84 33","1 rue de la paix","xyz","nantes","france",0),
@@ -90,3 +90,34 @@ WHERE orders.typePresta="formation";
 SELECT orders.typePresta, orders.designation, orders.unitPrice*orders.nbDays*1.2 AS prix_TTC 
 FROM clients JOIN orders ON clients.id=orders.clientId 
 WHERE orders.unitPrice*orders.nbDays*1.2>30000 AND orders.state=2;
+
+
+-- Si je veux dans une table, avoir une colonne résultant d'un calcul entre d'autres colonnes de la même table, calculé automatiquement :
+
+CREATE TABLE ...(
+    ...
+    ...
+    ...
+    unitPrice ...
+    nbDays ...
+    prix_UHT FLOAT GENERATED ALWAYS AS (unitPrice*nbDays) STORED,
+    prix_TTC FLO FLOAT GENERATED ALWAYS AS (unitPrice*nbDays*1.2) STORED);
+
+-- Si je veux faire une requête imprécise car je ne sais pas exactement le champs à rechercher :
+-- Si je sais que le nom de l'organisme de formation commence par "M2" (recherche en début de chaîne)
+
+SELECT * FROM clients WHERE compagnyName LIKE "M2%";
+
+-- Si je sais que le nom de l'organisme de formation fini par "formation" (recherche en fin de chaîne)
+
+SELECT * FROM clients WHERE compagnyName LIKE "%formation";
+
+-- Si je recherche le mail d'une personne travaillant chez Sopra Steria donc possédant un mail du type "...@sopra..." (recherche en milieu de chaîne)
+
+SELECT * FROM clients WHERE mail LIKE "%sopra%";
+
+-- Cela fonctionne de la même manière avec les chiffres
+-- Admettons que dans ma base de données, les numéros de téléphones possède des préfixes
+-- Si je recherche combien il y a de numéros de téléphone de clients français 
+
+SELECT COUNT(*) FROM clients WHERE phone LIKE "+33%";
