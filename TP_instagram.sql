@@ -203,4 +203,4 @@ WHERE commentaires.photoid=photos.id;
 
 SELECT COUNT(*) FROM photos 
 JOIN likes ON photos.id=likes.photoid
-WHERE photoid=4;
+WHERE photo.id=4;
