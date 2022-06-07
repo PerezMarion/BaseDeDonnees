@@ -1,5 +1,5 @@
-CREATE DATABASE gestion_magasin
-USE gestion_magasin
+CREATE DATABASE gestion_magasin;
+USE gestion_magasin;
 
 -- Table de jointure application
 
