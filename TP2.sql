@@ -65,35 +65,31 @@ ALTER TABLE orders ADD FOREIGN KEY(clientId) REFERENCES clients(id);
 SELECT clients.compagnyName, clients.state, orders.typePresta, orders.designation 
 FROM clients JOIN orders ON clients.id=orders.clientId;
 
--- 3. Remplissez la base de données au travers des insertions
-
--- ???
-
--- 4. Afficher toutes les formations sollicités par le client M2i formation
+-- 3. Afficher toutes les formations sollicités par le client M2i formation
 
 SELECT clients.compagnyName AS Entreprise,orders.typePresta AS Prestation,orders.designation AS Nom,orders.state AS Statut 
 FROM clients JOIN orders ON clients.id=orders.clientId 
 WHERE orders.typePresta="formation" AND clients.compagnyName="M2I formation";
 
--- 5. Afficher les noms et contacts de tous les contacts des clients qui ont sollicité un coaching
+-- 4. Afficher les noms et contacts de tous les contacts des clients qui ont sollicité un coaching
 
 SELECT DISTINCT(clients.id), clients.firstName AS Prenom, clients.lastName AS Nom, clients.email, clients.phone AS Telephone, clients.adress AS Adresse 
 FROM clients JOIN orders ON clients.id=orders.clientId 
 WHERE orders.typePresta="coaching";
 
--- 6. Afficher les noms et contacts de tous les contacts des clients qui ont sollicité un coaching pour les accompagnements React.js
+-- 5. Afficher les noms et contacts de tous les contacts des clients qui ont sollicité un coaching pour les accompagnements React.js
 
 SELECT DISTINCT(clients.id), clients.firstName AS Prenom, clients.lastName AS Nom, clients.email, clients.phone AS Telephone, clients.adress AS Adresse 
 FROM clients JOIN orders ON clients.id=orders.clientId 
 WHERE orders.typePresta="coaching" AND orders.designation="React.js";
 
--- 7. Pour chacune des demandes de formations, afficher le prix UHT et prix TTC
+-- 6. Pour chacune des demandes de formations, afficher le prix UHT et prix TTC
 
 SELECT orders.typePresta, orders.designation, orders.unitPrice*orders.nbDays AS prix_UHT, orders.unitPrice*orders.nbDays*1.2 AS prix_TTC 
 FROM clients JOIN orders ON clients.id=orders.clientId 
 WHERE orders.typePresta="formation";
 
--- 8. Lister toutes les prestations qui sont confirmés et qui vont rapporter plus de 30.000 euros
+-- 7. Lister toutes les prestations qui sont confirmés et qui vont rapporter plus de 30.000 euros
 
 SELECT orders.typePresta, orders.designation, orders.unitPrice*orders.nbDays*1.2 AS prix_TTC 
 FROM clients JOIN orders ON clients.id=orders.clientId 
