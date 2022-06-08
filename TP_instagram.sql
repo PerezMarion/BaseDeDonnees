@@ -163,7 +163,7 @@ INSERT INTO likes(id, utilisateurid, photoid) VALUES
 (26, 2, 39), (27, 5, 24), (28, 3, 7), (29, 2, 8), (30, 3, 5), (31, 3, 6), (32, 4, 29), (33, 2, 18), (34, 2, 17), (35, 8, 24), (36, 1, 4), (37, 5, 13),
 (38, 3, 33), (39, 7, 9), (40, 4, 39), (41, 7, 19), (42, 1, 33), (43, 3, 26), (44, 5, 39), (45, 3, 22), (46, 8, 45), (47, 1, 45), (48, 3, 18), (49, 2, 10), (50, 9, 22);
 
--- 4. Pur tous les commentaires, montrer le contenu et le username de l'auteur
+-- 4. Pour tous les commentaires, montrer le contenu et le username de l'auteur
 
 SELECT utilisateurs.pseudo, commentaires.comments FROM commentaires 
 JOIN utilisateurs ON utilisateurs.id=commentaires.utilisateurid;
@@ -180,7 +180,7 @@ JOIN utilisateurs ON photos.utilisateurid=utilisateurs.id;
 
 -- 7. Trouver tous les commentaires pour la photo d'id 3, avec le username de l'utilisateur qui a commenté
 
-SELECT utilisateurs.pseudo, commentaires.comments FROM photos
+SELECT photos.id, utilisateurs.pseudo, commentaires.comments FROM photos
 JOIN commentaires ON photos.id=commentaires.photoid
 JOIN utilisateurs ON utilisateurs.id=commentaires.utilisateurid 
 WHERE photos.id=3;
@@ -203,4 +203,4 @@ WHERE commentaires.photoid=photos.id;
 
 SELECT COUNT(*) FROM photos 
 JOIN likes ON photos.id=likes.photoid
-WHERE photo.id=4;
+WHERE photos.id=4;
